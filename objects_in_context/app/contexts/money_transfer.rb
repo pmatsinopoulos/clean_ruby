@@ -1,6 +1,6 @@
 class MoneyTransfer
-  def initialize(source, destination)
-    @source, @destination = source, destination
+  def initialize(source_id, destination_id)
+    @source, @destination = find_account(source_id), find_account(destination_id)
     assign_transferrer @source
   end
 
@@ -9,6 +9,10 @@ class MoneyTransfer
   end
 
   private
+
+  def find_account(account_id)
+    Account.find account_id
+  end
 
   def assign_transferrer(account)
     account.extend Transferrer

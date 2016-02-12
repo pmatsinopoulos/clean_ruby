@@ -1,11 +1,9 @@
 class TransfersController < ApplicationController
-  # The Tansfers Controller still remains quite complicated.
+  # We would prefer something more simple
   #
   def create
-    source = Account.find params[:account_id]
-    destination = Account.find params[:destination_id]
-    mt = MoneyTransfer.new(source, destination)
-    mt.execute(params[:amount])
+    transfer = MoneyTransfer.new(params[:account_id], params[:destination_id])
+    transfer.execute(params[:amount])
     redirect_to account_transfers_url account
   end
 end
